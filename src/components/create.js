@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function Create() {
-    let history = useHistory();
+    let history = useNavigate();
+    const handleLogout = () => {
+        localStorage.clear();
+        history('/login')
+    }
     const [isletme_adi, setIsletmeAdi] = useState('');
     const [isletme_adres, setIsletmeAdres] = useState('');
     const [isletme_sabit_tel, setTelefon] = useState('');
@@ -39,13 +43,13 @@ export default function Create() {
         data.append('isletim_web_adresi', web);
         data.append('isletme_sabit_tel', tel);
         data.append('kategori', kat);
-        data.append('calisma_saatler',cs);
+        data.append('calisma_saatler', cs);
         data.append('og_indirim', og);
-        data.append('harita_adresi',hadres);
-        data.append('harita_embed',hembed);
-        data.append('resmi_website',resweb);
-        data.append('hak_adresi',hak);
-       
+        data.append('harita_adresi', hadres);
+        data.append('harita_embed', hembed);
+        data.append('resmi_website', resweb);
+        data.append('hak_adresi', hak);
+
         let config = {
 
             method: 'post',
@@ -66,44 +70,44 @@ export default function Create() {
     }
     return (
         <div>
+            <Button onClick={handleLogout}>LOG OUT</Button>
             <Form className="create-form">
-            
                 <Form.Field>
                     <label>Isletme_Adi</label>
-                    <input id="adi"  onChange={(e) => setIsletmeAdi(e.target.value)} />
+                    <input id="adi" onChange={(e) => setIsletmeAdi(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>Isletme_Adres</label>
-                    <input id="adres"  onChange={(e) => setIsletmeAdres(e.target.value)} />
+                    <input id="adres" onChange={(e) => setIsletmeAdres(e.target.value)} />
                 </Form.Field>
-                
+
                 <Form.Field>
                     <label>Isletme Telefon</label>
                     <input id="tel" onChange={(e) => setTelefon(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>Isletim WEB ADRESI</label>
-                    <input id="webadres"  onChange={(e) => setWebadresi(e.target.value)} />
+                    <input id="webadres" onChange={(e) => setWebadresi(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>Kategori</label>
-                    <input id="kategori"  onChange={(e) => setKategori(e.target.value)} />
+                    <input id="kategori" onChange={(e) => setKategori(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>CALISMA SAATLER</label>
-                    <input id="cs"  onChange={(e) => setCalismaSaatler(e.target.value)} />
+                    <input id="cs" onChange={(e) => setCalismaSaatler(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>INDIRIM OGRENCI</label>
-                    <input id="ogindirim"  onChange={(e) => setOgIndirim(e.target.value)} />
+                    <input id="ogindirim" onChange={(e) => setOgIndirim(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>HARITA ADRESI</label>
-                    <input id="haradres"  onChange={(e) => setHaritaAdresi(e.target.value)} />
+                    <input id="haradres" onChange={(e) => setHaritaAdresi(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>HARITA EMBED LINK</label>
-                    <input id="harembed"  onChange={(e) => setHaritaEmbed(e.target.value)} />
+                    <input id="harembed" onChange={(e) => setHaritaEmbed(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>RESMI WEBSITE LINK</label>

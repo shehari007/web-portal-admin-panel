@@ -3,9 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import https from 'https'
+import { useNavigate } from 'react-router-dom';
 
 export default function Read() {
-
+    let history = useNavigate();
+    const handleLogout = () => {
+        localStorage.clear();
+        history('/login')
+    }
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
         const agent = new https.Agent({
@@ -67,11 +72,12 @@ export default function Read() {
     }
 
     return (
-        
+
         <div>
-            <br/>
+            <br />
             <Button href='/create'>ADD NEW</Button>
-            <br/>
+            <Button onClick={handleLogout}>LOG OUT</Button>
+            <br />
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
@@ -89,7 +95,7 @@ export default function Read() {
                         <Table.HeaderCell>HARITA EMBED LINKI</Table.HeaderCell>
                         <Table.HeaderCell>RESMI WEBSITESI</Table.HeaderCell>
                         <Table.HeaderCell>HAKKINDA ADRESI</Table.HeaderCell>
-                        
+
 
                     </Table.Row>
                 </Table.Header>
@@ -118,7 +124,7 @@ export default function Read() {
                                 <Table.Cell>{data.harita_embed}</Table.Cell>
                                 <Table.Cell>{data.resmi_website}</Table.Cell>
                                 <Table.Cell>{data.hak_adresi}</Table.Cell>
-                               
+
 
                             </Table.Row>
                         )
