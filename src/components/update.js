@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function Update() {
 
-    let history = useHistory();
+    
+    let history = useNavigate();
+    const handleLogout = () => {
+        localStorage.clear();
+        history('/login')
+    }
     const [isletme_id, setID] = useState('');
     const [isletme_adi, setIsletmeAdi] = useState('');
     const [isletme_adres, setIsletmeAdres] = useState('');
@@ -59,12 +64,12 @@ export default function Update() {
         data.append('isletim_web_adresi', web);
         data.append('isletme_sabit_tel', tel);
         data.append('kategori', kat);
-        data.append('calisma_saatler',cs);
+        data.append('calisma_saatler', cs);
         data.append('og_indirim', og);
-        data.append('harita_adresi',hadres);
-        data.append('harita_embed',hembed);
-        data.append('resmi_website',resweb);
-        data.append('hak_adresi',hak);
+        data.append('harita_adresi', hadres);
+        data.append('harita_embed', hembed);
+        data.append('resmi_website', resweb);
+        data.append('hak_adresi', hak);
 
         let config = {
 
@@ -81,13 +86,14 @@ export default function Update() {
             .catch(function (error) {
                 console.log(error);
             }).then(() => {
-               
+
             })
     }
     return (
         <div>
+            <Button onClick={handleLogout}>LOG OUT</Button>
             <Form className="create-form">
-            <Form.Field>
+                <Form.Field>
                     <label>Isletme_ID</label>
                     <input id="id" value={isletme_id} onChange={(e) => setID(e.target.value)} />
                 </Form.Field>
@@ -99,7 +105,7 @@ export default function Update() {
                     <label>Isletme_Adres</label>
                     <input id="adres" value={isletme_adres} onChange={(e) => setIsletmeAdres(e.target.value)} />
                 </Form.Field>
-                
+
                 <Form.Field>
                     <label>Isletme Telefon</label>
                     <input id="tel" value={isletme_sabit_tel} onChange={(e) => setTelefon(e.target.value)} />
